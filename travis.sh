@@ -2,27 +2,26 @@
 export ANDROID_TARGET=android-19
 
 echo ================== Update projects ==================
-
 echo ====== Update Demo ======
-pushd Demo
+cd Demo
 rm -rf ant.properties
 rm -rf project.properties
 android update project --name Demo --path . --target $ANDROID_TARGET
-popd
+cd ..
 
 echo ====== Update Demo Test project ======
-pushd DemoTest
+cd DemoTest
 rm -rf ant.properties
 rm -rf project.properties
 android update test-project -m ../Demo -p .
-popd
+cd ..
 
 echo ====== Build Demo & Test Project======
-pushd DemoTest
+cd DemoTest
 ant clean
 
 ant emma debug
-popd
+cd ..
 
 echo ======= copy output apk ======
 rm -rf output
