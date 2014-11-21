@@ -18,7 +18,7 @@ android:
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-19
     
-install: ant deps    
+install: true
 
 # Emulator Management: Create, Start and Wait
 before_script:
@@ -27,5 +27,6 @@ before_script:
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
+# build command
 script: "./travis.sh"
 
