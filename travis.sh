@@ -20,6 +20,13 @@ echo ====== Build Demo Project======
 cd DemoTest
 ant clean
 ant emma debug
+
+success=`echo $?`
+if [[ $success != 0 ]]; then
+echo "Build failure"
+exit 1
+fi
+
 cd ..
 
 echo ======= copy output apk ======
@@ -41,6 +48,12 @@ cp DemoTest/bin/DemoTest-debug.apk output/DemoTest.apk
 	cd Demo
 
     adb shell am instrument -w -e reportDir /sdcard/ut/ -e reportFile UnitTestReport.xml -e coverage true -e coverageFile /sdcard/ut/coverage.ec com.oops.demo.test/com.zutubi.android.junitreport.JUnitReportTestRunner
+    
+    success=`echo $?`
+	if [[ $success != 0 ]]; then
+		echo "Build failure"
+		exit 1
+	fi
 
     echo ========= get Report =========
     adb pull /sdcard/ut/UnitTestReport.xml
