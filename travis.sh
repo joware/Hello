@@ -16,10 +16,9 @@ rm -rf project.properties
 android update test-project -m ../Demo -p .
 cd ..
 
-echo ====== Build Demo & Test Project======
+echo ====== Build Demo Project======
 cd DemoTest
 ant clean
-
 ant emma debug
 cd ..
 
