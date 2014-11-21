@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <property
+        name="ruleset.home"
+        value="docs/sa" >
+    </property>
+
+    <target name="findbugs" >
+
+        <property
+            name="findbugs.home"
+            value="${env.FINDBUGS_HOME}" >
+        </property>
+
+        <path id="findbugs_lib" >
+            <fileset dir="${findbugs.home}/lib/" >
+                <include name="*.jar" />
+            </fileset>
+        </path>
+
+        <gettarget
+            androidAidlFileOut="project.target.framework.aidl"
+            androidJarFileOut="project.target.android.jar"
+            bootClassPathOut="project.target.class.path"
+            minSdkVersionOut="project.minSdkVersion"
+            targetApiOut="project.target.apilevel" />
+
+        <dependency
+            buildToolsFolder="${sdk.dir}/build-tools"
+            jarLibraryPathOut="project.all.jars.path"
+            libraryBinAidlFolderPathOut="project.library.bin.aidl.folder.path"
+            libraryFolderPathOut="project.library.folder.path"
+            libraryManifestFilePathOut="project.library.manifest.file.path"
+            libraryNativeFolderPathOut="project.library.native.folder.path"
+            libraryPackagesOut="project.library.packages"
+            libraryRFilePathOut="project.library.rfile.path"
+            libraryResFolderPathOut="project.library.res.folder.path"
+            renderscriptSupportLibsOut="project.rs.support.libs.path"
+            renderscriptSupportMode="${renderscript.support.mode}"
+            targetApi="${project.target.apilevel}"
+            verbose="${verbose}" />
+
+        <taskdef
+            name="findbugs"
+            classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
+            classpathref="findbugs_lib" />
+
+        <findbugs
+            excludeFilter="${ruleset.home}/findbugs-exclude.xml"
+            home="${findbugs.home}"
+            maxRank="14"
+            output="xml"
+            outputFile="findbugs-ant-results.xml" >
+
+            <auxClasspath path="${sdk.dir}/platforms/${target}/android.jar" />
+            <auxClasspath>
+                <pathelement location="${project.target.android.jar}" />
+                <path refid="project.all.jars.path" />
+            </auxClasspath>
+            <auxClasspath>
+                <fileset
+                    dir="${jar.libs.dir}"
+                    includes="*.jar" >
+                </fileset>
+            </auxClasspath>
+
+            <class location="${out.dir}" />
+            <sourcePath path="${source.dir}" />
+        </findbugs>
+    </target>
+
+</project>
