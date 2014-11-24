@@ -62,6 +62,11 @@ java -cp ${ANDROID_HOME}/tools/lib/emma.jar emma report -r xml -in bin/coverage.
 java -cp ${ANDROID_HOME}/tools/lib/emma.jar emma report -r html -in bin/coverage.em -in coverage.ec  -sp ./src/
 cd ..
 
+echo ========== update coverage report =======
+git add Demo/coverage
+git add Demo/coverage/*
+git commit
+git push
 
 
 
