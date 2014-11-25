@@ -54,15 +54,12 @@ adb pull /sdcard/ut/UnitTestReport.xml
 adb pull /sdcard/ut/coverage.ec
 
 success=`echo $?`
-if [[ $success != 0 ]]; then
-	echo "Unit test failure"
-	exit 1
-fi
 
 java -cp ${ANDROID_HOME}/tools/lib/emma.jar emma report -r xml -in bin/coverage.em -in coverage.ec  -sp ./src/
 java -cp ${ANDROID_HOME}/tools/lib/emma.jar emma report -r html -in bin/coverage.em -in coverage.ec  -sp ./src/
 cd ..
 
+exit $success
 
 
 
