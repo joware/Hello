@@ -32,3 +32,11 @@ install: true
 # build command
 script: "./travis.sh"
 
+after_success:
+  - echo ========== update coverage report =======
+  #- git add Demo/coverage
+  #- git add Demo/coverage/*
+  #- git commit
+  #- git push
+  
+  

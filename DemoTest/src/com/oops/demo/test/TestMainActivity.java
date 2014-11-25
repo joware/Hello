@@ -37,5 +37,9 @@ public class TestMainActivity extends ActivityInstrumentationTestCase2<MainActiv
 		View container = mainActivity.findViewById(com.oops.demo.R.id.container);
 		assertNotNull(container);
 	}
+	
+	public void testFailure() {
+		assertTrue(false);
+	}
 
 }
