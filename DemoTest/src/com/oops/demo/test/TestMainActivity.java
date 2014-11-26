@@ -4,6 +4,7 @@ import com.oops.demo.MainActivity;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.View;
 
 public class TestMainActivity extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -30,6 +31,15 @@ public class TestMainActivity extends ActivityInstrumentationTestCase2<MainActiv
 	
 	public void testCondition() {
 		assertNotNull(mainActivity);
+	}
+	
+	public void testView() {
+		View container = mainActivity.findViewById(com.oops.demo.R.id.container);
+		assertNotNull(container);
+	}
+	
+	public void testFailure() {
+		assertTrue(false);
 	}
 
 }
